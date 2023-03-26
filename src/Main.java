@@ -1,7 +1,4 @@
-import Classes.Cetak;
-import Classes.member;
-import Classes.Pelanggan;
-import Classes.cetakLembaran;
+import Classes.*;
 import Handler.UIFunc;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -58,14 +55,18 @@ public class Main {
                         }
 
                         line();
+                        Kertas k1 = new Kertas(kertas);
                         Cetak c1 = new Cetak(lembar,jenisBayar);
                         cetakLembaran l1 = new cetakLembaran(c1.getJumlahHalaman(),c1.getJenisPembayaran(),kertas,p1);
                         System.out.println("Jumlah Harga yang dibayar: "+l1.hargaCetak());
+                        System.out.print("Masukkan jumlah uang Anda: ");
+                        c1.setJumlahPembayaran(in.nextInt());
                         if(p1.isMember()){
                             m1.addMember(p1.getNama(),p1.getAlamat(),p1.getNoTelp(),p1.getEmail(),p1.isMember());
                             m1.earnPoint();
                         }
                         System.out.println("Point Anda: "+m1.getPoint());
+                        c1.printStruk(p1,l1.hargaCetak(),kertas,k1.getHarga());
                     } else if (get == 3) {
                         break;
                     } else if (get == 4) {

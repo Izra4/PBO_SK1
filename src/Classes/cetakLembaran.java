@@ -20,7 +20,7 @@ public class cetakLembaran extends Cetak {
     }
 
     public int hargaCetak() {
-        kertas kertas = new kertas(getJenisKertas());
+        Kertas kertas = new Kertas(getJenisKertas());
         double diskon = pelanggan.getDiscount(); // call getDiscount() method using pelanggan object
         double hargaSebelumDiskon = getJumlahHalaman() * kertas.getHarga();
         double hargaSetelahDiskon = hargaSebelumDiskon - (hargaSebelumDiskon * diskon);
