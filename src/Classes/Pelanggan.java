@@ -1,18 +1,20 @@
+package Classes;
+
 public class Pelanggan {
     private String nama;
     private String alamat;
     private String noTelp;
     private String email;
     private boolean member;
-    private static int noAntrian;
+//    private static int noAntrian;
 
-    Pelanggan(String nama, String alamat, String noTelp, String email, boolean member){
+    public Pelanggan(String nama, String alamat, String noTelp, String email, boolean member){
         this.nama = nama;
         this.alamat = alamat;
         this.noTelp = noTelp;
         this.email = email;
         this.member = member;
-        Pelanggan.noAntrian++;
+//        noAntrian++;
     }
 
     public String getNama() {
@@ -55,13 +57,9 @@ public class Pelanggan {
         this.member = member;
     }
 
-    public static int getNoAntrian() {
-        return noAntrian;
-    }
-
-    public static void setNoAntrian(int noAntrian) {
-        Pelanggan.noAntrian = noAntrian;
-    }
+//    public static int getNoAntrian() {
+//        return noAntrian;
+//    }
 
     public void registrasi(String nama, String alamat, String noTelp, String email){
         setNama(nama);

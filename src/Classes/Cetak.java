@@ -1,9 +1,20 @@
+package Classes;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Cetak {
     private int jumlahHalaman;
     private String jenisPembayaran;
+    private int jumlahPembayaran;
+
+    public int getJumlahPembayaran() {
+        return jumlahPembayaran;
+    }
+
+    public void setJumlahPembayaran(int jumlahPembayaran) {
+        this.jumlahPembayaran = jumlahPembayaran;
+    }
 
     public Cetak(int jumlahHalaman, String jenisPembayaran) {
         this.jumlahHalaman = jumlahHalaman;
@@ -20,30 +31,12 @@ public class Cetak {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         return time.format(formatter);
     }
-}
-
-class cetakLembaran extends Cetak{
-    private String jenisKertas;
-    public cetakLembaran(int jumlahHalaman, String jenisPembayaran, String jenisKertas) {
-        super(jumlahHalaman, jenisPembayaran);
-        this.jenisKertas = jenisKertas;
-    }
-
-    public String getJenisKertas() {
-        return jenisKertas;
-    }
-
-    public void setJenisKertas(String jenisKertas) {
-        this.jenisKertas = jenisKertas;
-    }
 
     public int hargaCetak(){
-        kertas kertas = new kertas(getJenisKertas());
-        return getJumlahHalaman() * kertas.getHarga();
+        return 0;
     }
-
-
 }
+
 class kertas {
     public static final String A4 = "A4";
     public static final String A5 = "A5";
