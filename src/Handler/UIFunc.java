@@ -39,4 +39,16 @@ public class UIFunc {
         System.out.println("4. Keluar");
         System.out.print("Pilihan Anda: ");
     }
+
+    public static Pelanggan registrasiPelanggan(Scanner in, Pelanggan p1) {
+        System.out.print("Masukkan nama Anda\t\t: ");
+        String nama = in.nextLine();
+        System.out.print("Masukkan alamat Anda\t\t: ");
+        String alamat = in.nextLine();
+        System.out.print("Masukkan nomer telpon Anda\t:");
+        String number = in.nextLine();
+        System.out.print("Masukkan alamat email Anda\t:");
+        String email = in.nextLine();
+        return new Pelanggan(nama, alamat, number, email, true);
+    }
 }

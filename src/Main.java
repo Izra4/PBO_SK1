@@ -5,7 +5,6 @@ import Classes.cetakLembaran;
 import Handler.UIFunc;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
 import static Handler.UIFunc.line;
 import static Handler.UIFunc.tampilanCetak;
 
@@ -23,16 +22,7 @@ public class Main {
             in.nextLine();
             line();
             if (input == 1){
-                System.out.print("Masukkan nama Anda\t\t: ");
-                String nama = in.nextLine();
-                //alamat,notelp,email
-                System.out.print("Masukkan alamat Anda\t\t: ");
-                String alamat = in.nextLine();
-                System.out.print("Masukkan nomer telpon Anda\t:");
-                String number = in.nextLine();
-                System.out.print("Masukkan alamat email Anda\t:");
-                String email = in.nextLine();
-                p1.registrasi(nama,alamat,number,email,true);
+                p1 = UIFunc.registrasiPelanggan(in, p1);
             } else if (input == 2) {
                 do {
                     lembar = 0;
@@ -69,18 +59,13 @@ public class Main {
 
                         line();
                         Cetak c1 = new Cetak(lembar,jenisBayar);
-//                        System.out.println(p1.getNama());
-//                        System.out.println(p1.getAlamat());
-//                        System.out.println(p1.getEmail());
-//                        System.out.println(p1.getNoTelp());
-                        cetakLembaran l1 = new cetakLembaran(c1.getJumlahHalaman(),c1.getJenisPembayaran(),kertas);
+                        cetakLembaran l1 = new cetakLembaran(c1.getJumlahHalaman(),c1.getJenisPembayaran(),kertas,p1);
                         System.out.println("Jumlah Harga yang dibayar: "+l1.hargaCetak());
                         if(p1.isMember()){
                             m1.addMember(p1.getNama(),p1.getAlamat(),p1.getNoTelp(),p1.getEmail(),p1.isMember());
                             m1.earnPoint();
                         }
-                        System.out.println(m1.getPoint());
-
+                        System.out.println("Point Anda: "+m1.getPoint());
                     } else if (get == 3) {
                         break;
                     } else if (get == 4) {
