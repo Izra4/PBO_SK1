@@ -31,10 +31,6 @@ public class Cetak {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         return time.format(formatter);
     }
-
-    public int hargaCetak(){
-        return 0;
-    }
 }
 
 class kertas {

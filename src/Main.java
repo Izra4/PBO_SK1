@@ -1,4 +1,5 @@
 import Classes.Cetak;
+import Classes.member;
 import Classes.Pelanggan;
 import Classes.cetakLembaran;
 import Handler.UIFunc;
@@ -12,12 +13,14 @@ public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         Pelanggan p1 = new Pelanggan("","","","",false);
+        member m1 = new member(p1.getNama(),p1.getAlamat(),p1.getNoTelp(),p1.getEmail(),p1.isMember());
         int input,lembar;
         char req;
         System.out.println("======== Selamat Datang di Percetakan Filkom ========");
         do {
             UIFunc.tampilanUtama();
             input = in.nextInt();
+            in.nextLine();
             line();
             if (input == 1){
                 System.out.print("Masukkan nama Anda\t\t: ");
@@ -66,9 +69,18 @@ public class Main {
 
                         line();
                         Cetak c1 = new Cetak(lembar,jenisBayar);
-
+//                        System.out.println(p1.getNama());
+//                        System.out.println(p1.getAlamat());
+//                        System.out.println(p1.getEmail());
+//                        System.out.println(p1.getNoTelp());
                         cetakLembaran l1 = new cetakLembaran(c1.getJumlahHalaman(),c1.getJenisPembayaran(),kertas);
                         System.out.println("Jumlah Harga yang dibayar: "+l1.hargaCetak());
+                        if(p1.isMember()){
+                            m1.addMember(p1.getNama(),p1.getAlamat(),p1.getNoTelp(),p1.getEmail(),p1.isMember());
+                            m1.earnPoint();
+                        }
+                        System.out.println(m1.getPoint());
+
                     } else if (get == 3) {
                         break;
                     } else if (get == 4) {

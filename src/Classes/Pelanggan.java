@@ -80,34 +80,3 @@ public class Pelanggan {
     }
 }
 
-class member extends Pelanggan{
-    private int point;
-    member(String nama, String alamat, String noTelp, String email, boolean member) {
-        super(nama, alamat, noTelp, email, member);
-    }
-
-    public int getPoint() {
-        return point;
-    }
-
-    public void setPoint(int point) {
-        this.point = point;
-    }
-    public void earnPoint(int point) {
-        int currentPoint = getPoint();
-        setPoint(currentPoint + point);
-    }
-    public double getDiscount(){
-        double discount = super.getDiscount();
-        if (isMember() && getPoint() >= 50) {
-            discount += 0.02;
-        }
-        return discount;
-    }
-}
-
-class reguler extends Pelanggan{
-    reguler(String nama, String alamat, String noTelp, String email, boolean member) {
-        super(nama, alamat, noTelp, email, member);
-    }
-}
