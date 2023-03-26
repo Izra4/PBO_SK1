@@ -45,6 +45,11 @@ public class Pelanggan {
         return email;
     }
 
+    public void setMember(boolean member) {
+        this.member = member;
+    }
+
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -53,19 +58,17 @@ public class Pelanggan {
         return member;
     }
 
-    public void setMember(boolean member) {
-        this.member = member;
-    }
 
 //    public static int getNoAntrian() {
 //        return noAntrian;
 //    }
 
-    public void registrasi(String nama, String alamat, String noTelp, String email){
+    public void registrasi(String nama, String alamat, String noTelp, String email, Boolean member){
         setNama(nama);
         setAlamat(alamat);
         setNoTelp(noTelp);
         setEmail(email);
+        setMember(member);
     }
 
     public double getDiscount(){
