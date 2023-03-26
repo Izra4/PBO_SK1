@@ -5,9 +5,6 @@ public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         System.out.println("Ini rico");
-        System.out.println("Ini rico");
-        System.out.println("Ini rico");
-        System.out.println("Ini rico");
         int input,lembar;
         char req;
         System.out.println("======== Selamat Datang di Percetakan Filkom ========");
