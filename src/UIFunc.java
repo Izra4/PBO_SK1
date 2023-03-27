@@ -1,10 +1,5 @@
-package Handler;
-
-import Classes.Cetak;
 import Classes.Pelanggan;
-import Classes.cetakLembaran;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class UIFunc {

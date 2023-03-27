@@ -1,11 +1,11 @@
 package Classes;
 
-public class cetakLembaran extends Cetak {
+public class CetakLembaran extends Cetak {
     private String jenisKertas;
     private Pelanggan pelanggan;
 
 
-    public cetakLembaran(int jumlahHalaman, String jenisPembayaran, String jenisKertas, Pelanggan pelanggan) {
+    public CetakLembaran(int jumlahHalaman, String jenisPembayaran, String jenisKertas, Pelanggan pelanggan) {
         super(jumlahHalaman, jenisPembayaran);
         this.jenisKertas = jenisKertas;
         this.pelanggan = pelanggan;

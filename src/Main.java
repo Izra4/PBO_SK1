@@ -1,9 +1,7 @@
 import Classes.*;
-import Handler.UIFunc;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import static Handler.UIFunc.line;
-import static Handler.UIFunc.tampilanCetak;
 
 public class Main {
     public static void main(String[] args) {
@@ -17,16 +15,16 @@ public class Main {
             UIFunc.tampilanUtama();
             input = in.nextInt();
             in.nextLine();
-            line();
+            UIFunc.line();
             if (input == 1){
                 p1 = UIFunc.registrasiPelanggan(in, p1);
             } else if (input == 2) {
                 do {
                     lembar = 0;
                     //Tampil menu
-                    tampilanCetak();
+                    UIFunc.tampilanCetak();
                     int get = in.nextInt();
-                    line();
+                    UIFunc.line();
                     if (get == 1){
                         //will do it later
                         System.out.println("SARI ROTI");
@@ -54,10 +52,10 @@ public class Main {
                             case 3 -> kertas = "F4";
                         }
 
-                        line();
+                        UIFunc.line();
                         Kertas k1 = new Kertas(kertas);
                         Cetak c1 = new Cetak(lembar,jenisBayar);
-                        cetakLembaran l1 = new cetakLembaran(c1.getJumlahHalaman(),c1.getJenisPembayaran(),kertas,p1);
+                        CetakLembaran l1 = new CetakLembaran(c1.getJumlahHalaman(),c1.getJenisPembayaran(),kertas,p1);
                         System.out.println("Jumlah Harga yang dibayar: "+l1.hargaCetak());
                         System.out.print("Masukkan jumlah uang Anda: ");
                         c1.setJumlahPembayaran(in.nextInt());
@@ -77,7 +75,7 @@ public class Main {
                     }
                     System.out.print("Apakah ada transaksi lain? (y/n): ");
                     req = in.next().charAt(0);
-                    line();
+                    UIFunc.line();
                 }while (req != 'n');
             }
         }while (input != 3);
