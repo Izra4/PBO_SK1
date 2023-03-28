@@ -8,7 +8,6 @@ import java.util.Random;
 public class member extends Pelanggan {
     private int point;
     private LocalDate bergabung;
-
     public member(String namaDepan,String namaBelakang ,String alamat, String noTelp, String email, boolean member) {
         super(namaDepan,namaBelakang ,alamat, noTelp, email,member);
         point = 0;

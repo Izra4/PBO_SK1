@@ -89,6 +89,7 @@ public class Order {
             default -> "";
         };
     }
+
     public boolean checkOut(char pilih) {
         if(pilih == 'y' || pilih == 'Y') {
             return true;
@@ -96,7 +97,7 @@ public class Order {
             return false;
         }
     }
-    public void printDetails(char pilih, Pelanggan pelanggan, String jenisBayar, int halaman, String kertas,int hargaKertas,int uang,int ongkos) {
+    public void printDetails(char pilih, Pelanggan pelanggan, String jenisBayar, int halaman, String kertas,int hargaKertas,int uang) {
         if (checkOut(pilih)){
             System.out.println("===============================");
             System.out.println("       STRUK PERCETAKAN        ");
@@ -109,6 +110,34 @@ public class Order {
             System.out.println("Jumlah Halaman   : " + halaman);
             System.out.println("Jenis Kertas     : " + kertas);
             System.out.println("Harga Kertas     : Rp. " + hargaKertas);
+            System.out.println("Ongkos Kirim     : Rp. "+getOngkir());
+            System.out.println("Total Harga      : Rp. " + getTotalHarga());
+            System.out.println("------------------------------");
+            System.out.println("Jumlah Bayar     : Rp. " + uang);
+            System.out.println("===============================");
+            System.out.println("Kembalian        : Rp. " + (uang - getTotalHarga()));
+            setStatus(Status.Lunas);
+            System.out.println("Status Pesanan   : "+getStatusString());
+            System.out.println("===============================");
+        }else {
+            System.out.println("Anda belum checkout!");
+        }
+    }
+    public void printDetails(char pilih, Pelanggan pelanggan, String jenisBayar, int halaman,String jenisJilid,int hargaJilid ,String kertas,int hargaKertas,int uang) {
+        if (checkOut(pilih)){
+            System.out.println("===============================");
+            System.out.println("       STRUK PERCETAKAN        ");
+            System.out.println("===============================");
+            System.out.println("Nomor Pesanan    : "+getNoPesanan());
+            System.out.println("Nama Pelanggan   : " + pelanggan.getFullNama());
+            System.out.println("Jenis Pembayaran : " + jenisBayar);
+            System.out.println("Tanggal/waktu    : " + getJam());
+            System.out.println("------------------------------");
+            System.out.println("Jumlah Halaman   : " + halaman);
+            System.out.println("Jenis Kertas     : " + kertas);
+            System.out.println("Harga Kertas     : Rp. " + hargaKertas);
+            System.out.println("Jenis Jilid      : Rp. " + jenisJilid);
+            System.out.println("Harga Jilid      : Rp. " + hargaJilid);
             System.out.println("Ongkos Kirim     : Rp. "+getOngkir());
             System.out.println("Total Harga      : Rp. " + getTotalHarga());
             System.out.println("------------------------------");
