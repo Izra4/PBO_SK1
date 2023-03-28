@@ -1,7 +1,11 @@
 package Classes;
 
+import java.time.Duration;
+import java.time.LocalDate;
+
 public class member extends Pelanggan {
     private int point;
+    private LocalDate bergabung;
 
     public member(String namaDepan,String namaBelakang ,String alamat, String noTelp, String email, boolean member) {
         super(namaDepan,namaBelakang ,alamat, noTelp, email,member);
@@ -13,6 +17,20 @@ public class member extends Pelanggan {
         setNoTelp(noTelp);
         setEmail(email);
         setMember(member);
+        this.bergabung = LocalDate.now();
+    }
+
+    public LocalDate getBergabung() {
+        return bergabung;
+    }
+
+    public void setBergabung(LocalDate bergabung) {
+        this.bergabung = bergabung;
+    }
+
+    public Duration getLamaMember() {
+        LocalDate hariIni = LocalDate.now();
+        return Duration.between(bergabung.atStartOfDay(), hariIni.atStartOfDay());
     }
 
     public int getPoint() {
