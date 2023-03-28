@@ -9,12 +9,12 @@ public class Order {
     private int biayaCetak;
     private int ongkir;
     private String kecamatan;
-    private int diskon;
+    private double diskon;
     private int totalHarga;
     private Status status;
     private boolean checkOut;
 
-    public Order(int biayaCetak,int diskon ,String kecamatan){
+    public Order(int biayaCetak,double diskon ,String kecamatan){
         this.biayaCetak = biayaCetak;
         this.kecamatan = kecamatan;
         this.diskon = diskon;
@@ -28,15 +28,7 @@ public class Order {
         return noPesanan;
     }
 
-    public void setBiayaCetak(int biayaCetak) {
-        this.biayaCetak = biayaCetak;
-    }
-
-    public void setDiskon(int diskon) {
-        this.diskon = diskon;
-    }
-
-    public int getDiskon() {
+    public double getDiskon() {
         return diskon;
     }
 
@@ -66,7 +58,7 @@ public class Order {
         return ongkir;
     }
     private void setTotalHarga(){
-        this.totalHarga = biayaCetak + ongkir - diskon;
+        this.totalHarga = (int) (biayaCetak + ongkir - diskon);
     }
     public int getTotalHarga() {
         return totalHarga;
@@ -97,7 +89,37 @@ public class Order {
             default -> "";
         };
     }
-    public void checkOut() {
-
+    public boolean checkOut(char pilih) {
+        if(pilih == 'y' || pilih == 'Y') {
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public void printDetails(char pilih, Pelanggan pelanggan, String jenisBayar, int halaman, String kertas,int hargaKertas,int uang,int ongkos) {
+        if (checkOut(pilih)){
+            System.out.println("===============================");
+            System.out.println("       STRUK PERCETAKAN        ");
+            System.out.println("===============================");
+            System.out.println("Nomor Pesanan    : "+getNoPesanan());
+            System.out.println("Nama Pelanggan   : " + pelanggan.getFullNama());
+            System.out.println("Jenis Pembayaran : " + jenisBayar);
+            System.out.println("Tanggal/waktu    : " + getJam());
+            System.out.println("------------------------------");
+            System.out.println("Jumlah Halaman   : " + halaman);
+            System.out.println("Jenis Kertas     : " + kertas);
+            System.out.println("Harga Kertas     : Rp. " + hargaKertas);
+            System.out.println("Ongkos Kirim     : Rp. "+getOngkir());
+            System.out.println("Total Harga      : Rp. " + getTotalHarga());
+            System.out.println("------------------------------");
+            System.out.println("Jumlah Bayar     : Rp. " + uang);
+            System.out.println("===============================");
+            System.out.println("Kembalian        : Rp. " + (uang - getTotalHarga()));
+            setStatus(Status.Lunas);
+            System.out.println("Status Pesanan   : "+getStatusString());
+            System.out.println("===============================");
+        }else {
+            System.out.println("Anda belum checkout!");
+        }
     }
 }

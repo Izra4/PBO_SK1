@@ -154,6 +154,18 @@ public abstract class Pelanggan {
             int get = in.nextInt();
             in.nextLine();
             UIFunc.line();
+            System.out.print("Masukkan jenis pembayaran yang anda suka      : ");
+            String jenisBayar = in.nextLine();
+            System.out.println("Masukkan lokasi pengiriman:\n1. Sukun\n2. Wagir\n3. Lowokwaru\n4. Klojen");
+            int kec = in.nextInt();
+            String kecamatan = "";
+            switch (kec){
+                case 1 -> kecamatan = "Sukun";
+                case 2 -> kecamatan = "Wagir";
+                case 3 -> kecamatan = "Lowokwaru";
+                case 4 -> kecamatan = "Klojen";
+            }
+            UIFunc.line();
             if (get == 1){
                 System.out.print("Masukkan judul buku yang ingin anda cetak: ");
                 String judul = in.nextLine();
@@ -173,8 +185,6 @@ public abstract class Pelanggan {
                     }
                 }
                 in.nextLine();
-                System.out.print("Masukkan jenis pembayaran yang anda suka      : ");
-                String jenisBayar = in.nextLine();
                 System.out.println("Masukkan jenis kertas yang dibutuhkan         :\n1.A4\n2.A5\n3.F4 ");
                 System.out.print("Pilihan Anda: ");
                 int jenisKertas = in.nextInt();
@@ -225,9 +235,7 @@ public abstract class Pelanggan {
                         in.nextLine();
                     }
                 }
-                in.nextLine();
-                System.out.print("Masukkan jenis pembayaran yang anda suka      : ");
-                String jenisBayar = in.nextLine();
+                in.nextLine();;
                 System.out.println("Masukkan jenis kertas yang dibutuhkan         :\n1.A4\n2.A5\n3.F4 ");
                 System.out.print("Pilihan Anda: ");
                 int jenisKertas = in.nextInt();
@@ -243,16 +251,16 @@ public abstract class Pelanggan {
                 Cetak c1 = new Cetak(lembar,jenisBayar);
                 CetakLembaran l1 = new CetakLembaran(c1.getJumlahHalaman(),c1.getJenisPembayaran(),kertas,r1);
                 totalBiaya[i] = l1.hargaCetak();
-                System.out.println("Jumlah Harga yang dibayar: "+l1.hargaCetak());
-                System.out.print("Masukkan jumlah uang Anda: ");
-                c1.setJumlahPembayaran(in.nextInt());
                 if(r1.isMember()){
                     m1.addMember(r1.getAlamat(),r1.getNoTelp(),r1.getEmail(),r1.isMember());
                     m1.earnPoint();
                 }
                 System.out.println("Point Anda: "+m1.getPoint());
-                l1.printStruk(r1,l1.hargaCetak(),kertas,k1.getHarga(),0,"",c1.getJumlahPembayaran());
-
+//                l1.printStruk(r1,l1.hargaCetak(),kertas,k1.getHarga(),0,"",c1.getJumlahPembayaran());
+                Order order = new Order(l1.hargaCetak(), getDiscount(),kecamatan);
+                System.out.println("Checkout? (y/n): ");
+                req = in.next().charAt(0);
+                order.printDetails(req,r1,jenisBayar,c1.getJumlahHalaman(),k1.getJenisKertas(),k1.getHarga(),order.getTotalHarga(),order.getOngkir());
             } else if (get == 3) {
                 break;
             } else if (get == 4) {
@@ -262,6 +270,7 @@ public abstract class Pelanggan {
                 System.out.println("Pilihan tidak tersedia!");
             }
         }
+
         setJudul(judulBuku);
         setTotalBiaya(totalBiaya);
         setPages(pages);
