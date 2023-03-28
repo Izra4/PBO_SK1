@@ -30,6 +30,12 @@ public class Main {
                 r1 = UIFunc.registrasiPelanggan(in, r1);
             } else if (input == 2) {
                 r1.makeOrder(in,r1,m1);
+                r1.printJudul();
+                r1.printWriter();
+                r1.printJenisPaper();
+                r1.printJilid();
+                System.out.println(r1.pages());
+                System.out.println(r1.totalPrice());
             }
         }while (input != 3);
     }

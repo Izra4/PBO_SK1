@@ -2,6 +2,8 @@ package Classes;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Random;
 
 public class member extends Pelanggan {
     private int point;
@@ -17,15 +19,19 @@ public class member extends Pelanggan {
         setNoTelp(noTelp);
         setEmail(email);
         setMember(member);
-        this.bergabung = LocalDate.now();
+        setBergabung();
     }
 
     public LocalDate getBergabung() {
         return bergabung;
     }
-
-    public void setBergabung(LocalDate bergabung) {
-        this.bergabung = bergabung;
+    public int randomInt(){
+        Random rand = new Random();
+        return rand.nextInt(5)+1;
+    }
+    public void setBergabung() {
+        LocalDate now = LocalDate.now();
+        this.bergabung = now.minusDays(randomInt());
     }
 
     public Duration getLamaMember() {
