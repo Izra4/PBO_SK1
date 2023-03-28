@@ -2,7 +2,7 @@ package Classes;
 
 
 public interface Applicable {
-    public boolean isCustomerEligible();
-    public boolean isMinimumPriceEligible();
-    public boolean isShippingFeeEligible();
+    public boolean isCustomerEligible(Pelanggan pelanggan);
+    public boolean isMinimumPriceEligible(Order order);
+    public boolean isShippingFeeEligible(Order order);
 }

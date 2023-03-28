@@ -40,65 +40,80 @@ public abstract class Promotion implements Applicable {
     }
 
     @Override
-    public boolean isCustomerEligible() {
-
-        return false;
+    public boolean isCustomerEligible(Pelanggan pelanggan) {
+        return pelanggan.isMember();
     }
 
     @Override
     public boolean isMinimumPriceEligible(Order order) {
-        if (order.getTotalHarga()==)
-
+        return order.getTotalHarga()>=50000;
     }
 
     @Override
     public boolean isShippingFeeEligible(Order order) {
-        if (order.)
-
+        return order.getTotalHarga() >= 50000;
     }
 }
 class PotongHarga extends Promotion {
     public PotongHarga() {
         super();
     }
-    public double promoDiskon(Order order) throws Exception {
-        if (CashBack()<50000) {
-            throw new Exception("Minimal Transaksi harus 50000");
-    }
-        return (int)order.getTotalHarga() *0.01;
-    }
-}
 
-class CashBack {
-    public CashBack() {
-        super();
-    }
-    public double promoCashBack(Order order) throws Exception{
-        int cashBack = 0;
-        if (order.getTotalHarga()<50000) {
+    public double promoDiskon(Order order,Pelanggan pelanggan) throws Exception {
+        if (!isCustomerEligible(pelanggan)) {
+            return -1;
+        }else if (isShippingFeeEligible(order)) {
+            return -1;
+        } else if (isMinimumPriceEligible(order)) {
             throw new Exception("Minimal Transaksi harus 50000");
-        } else if (order.getTotalHarga()>=50000 && order.getTotalHarga()<75000) {
-            cashBack = 3000;
-        } else if (order.getTotalHarga()>=75000 && order.getTotalHarga()<10000) {
-            cashBack = 5000;
-        } else if (order.getTotalHarga()>=100000) {
-            cashBack = 7000;
+        } else {
+            return (int) order.getTotalHarga() * 0.01;
         }
-        return cashBack;
-    }
 
+    }
 }
 
-class PotongOngkir {
-    public PotongOngkir() {
-        super();
-    }
-    public double promoOngkir(Order order) throws Exception {
-        int totalHarga = order.getTotalHarga();
-        int ongkir = order.getOngkir();
-        if (totalHarga<25000) {
-            throw new Exception("Minimal Transaksi harus 50000");
+
+    class CashBack extends Promotion {
+        public CashBack() {
+            super();
         }
-        return (int)ongkir*0.01;
+
+        public double promoCashBack(Order order,Pelanggan pelanggan) throws Exception {
+            int cashBack = 0;
+            if (!isCustomerEligible(pelanggan)) {
+                return -1;
+            }else if (isShippingFeeEligible(order)) {
+                return -1;
+            }else if (isMinimumPriceEligible(order)) {
+                throw new Exception("Minimal Transaksi harus 50000");
+            } else if (order.getTotalHarga() >= 50000 && order.getTotalHarga() < 75000) {
+                cashBack = 3000;
+            } else if (order.getTotalHarga() >= 75000 && order.getTotalHarga() < 10000) {
+                cashBack = 5000;
+            } else if (order.getTotalHarga() >= 100000) {
+                cashBack = 7000;
+            }
+            return cashBack;
+        }
+
     }
-}
+
+    class PotongOngkir extends Promotion {
+        public PotongOngkir() {
+            super();
+        }
+
+        public double promoOngkir(Order order,Pelanggan pelanggan) throws Exception {
+            int totalHarga = order.getTotalHarga();
+            int ongkir = order.getOngkir();
+            if (!isCustomerEligible(pelanggan)) {
+                return -1;
+            }else if (isShippingFeeEligible(order)) {
+                return -1;
+            }else if (isMinimumPriceEligible(order)) {
+                throw new Exception("Minimal Transaksi harus 50000");
+            }
+            return (int) ongkir * 0.01;
+        }
+    }
