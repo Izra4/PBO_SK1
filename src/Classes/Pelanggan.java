@@ -73,13 +73,13 @@ public abstract class Pelanggan {
         return fullNama(getNamaDepan(),getNamaBelakang());
     }
 
-    public void registrasi(String namaDepan,String namaBelakang ,String alamat, String noTelp, String email, Boolean member){
-        fullNama(namaDepan,namaBelakang);
-        setAlamat(alamat);
-        setNoTelp(noTelp);
-        setEmail(email);
-        setMember(member);
-    }
+//    public void registrasi(String namaDepan,String namaBelakang ,String alamat, String noTelp, String email, Boolean member){
+//        fullNama(namaDepan,namaBelakang);
+//        setAlamat(alamat);
+//        setNoTelp(noTelp);
+//        setEmail(email);
+//        setMember(member);
+//    }
 
     public double getDiscount(){
         if (isMember()){

@@ -15,11 +15,12 @@ public class Main {
         do {
             if (isEmpty) {
                 System.out.println("Isi biodata dibawah ini");
-                System.out.println("Masukkan nama depan anda : ");
+                System.out.print("Masukkan nama depan anda : ");
                 r1.setNamaDepan(in.nextLine());
-                System.out.println("Masukkan nama belakang anda : ");
+                System.out.print("Masukkan nama belakang anda : ");
                 r1.setNamaBelakang(in.nextLine());
                 isEmpty = false;
+                UIFunc.line();
             }
             UIFunc.tampilanUtama();
             input = in.nextInt();
