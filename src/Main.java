@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("OCIR");
         Scanner in = new Scanner(System.in);
         Reguler r1 = new Reguler("","","","","",false);
         member m1 = new member(r1.getNamaDepan(), r1.getNamaBelakang(), r1.getAlamat(),r1.getNoTelp(),r1.getEmail(),r1.isMember());
@@ -16,11 +15,12 @@ public class Main {
         do {
             if (isEmpty) {
                 System.out.println("Isi biodata dibawah ini");
-                System.out.println("Masukkan nama depan anda : ");
+                System.out.print("Masukkan nama depan anda : ");
                 r1.setNamaDepan(in.nextLine());
-                System.out.println("Masukkan nama belakang anda : ");
+                System.out.print("Masukkan nama belakang anda : ");
                 r1.setNamaBelakang(in.nextLine());
                 isEmpty = false;
+                UIFunc.line();
             }
             UIFunc.tampilanUtama();
             input = in.nextInt();
