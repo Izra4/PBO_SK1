@@ -19,23 +19,8 @@ public class Cetak {
     public void setJumlahPembayaran(int jumlahPembayaran) {
         this.jumlahPembayaran = jumlahPembayaran;
     }
-    public void printStruk(Pelanggan pelanggan, int totalHarga, String jenisKertas, int hargaKertas) {
-        System.out.println("===============================");
-        System.out.println("       STRUK PERCETAKAN        ");
-        System.out.println("===============================");
-        System.out.println("Nama Pelanggan : " + pelanggan.getNama());
-        System.out.println("Jenis Pembayaran : " + getJenisPembayaran());
-        System.out.println("Tanggal/waktu : " + getJam());
-        System.out.println("------------------------------");
-        System.out.println("Jumlah Halaman : " + getJumlahHalaman());
-        System.out.println("Jenis Kertas : " + jenisKertas);
-        System.out.println("Harga Kertas : Rp. " + hargaKertas);
-        System.out.println("Total Harga : Rp. " + totalHarga);
-        System.out.println("------------------------------");
-        System.out.println("Jumlah Bayar : Rp. " + getJumlahPembayaran());
-        System.out.println("===============================");
-        System.out.println("Kembalian : Rp. "+(getJumlahPembayaran()-totalHarga));
-        System.out.println("===============================");
+    public void printStruk(Pelanggan pelanggan, int totalHarga, String jenisKertas, int hargaKertas, int hargaJilid, String jenisJilid, int uang) {
+
     }
 
     public int getJumlahHalaman() {
@@ -50,4 +35,3 @@ public class Cetak {
         return time.format(formatter);
     }
 }
-

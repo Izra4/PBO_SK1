@@ -3,12 +3,12 @@ package Classes;
 public class member extends Pelanggan {
     private int point;
 
-    public member(String nama, String alamat, String noTelp, String email, boolean member) {
-        super(nama, alamat, noTelp, email, member);
+    public member(String namaDepan,String namaBelakang ,String alamat, String noTelp, String email, boolean member) {
+        super(namaDepan,namaBelakang ,alamat, noTelp, email,member);
         point = 0;
     }
-    public void addMember(String nama, String alamat, String noTelp, String email, boolean member){
-        setNama(nama);
+    public void addMember(String alamat, String noTelp, String email, boolean member){
+        fullNama(getNamaDepan(),getNamaBelakang());
         setAlamat(alamat);
         setNoTelp(noTelp);
         setEmail(email);

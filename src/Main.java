@@ -1,23 +1,32 @@
 import Classes.*;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
 
 public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        Pelanggan p1 = new Pelanggan("","","","",false);
-        member m1 = new member(p1.getNama(),p1.getAlamat(),p1.getNoTelp(),p1.getEmail(),p1.isMember());
+        Reguler r1 = new Reguler("","","","","",false);
+        member m1 = new member(r1.getNamaDepan(), r1.getNamaBelakang(), r1.getAlamat(),r1.getNoTelp(),r1.getEmail(),r1.isMember());
         int input,lembar;
         char req;
-        System.out.println("======== Selamat Datang di Percetakan Filkom ========");
+        boolean isEmpty = true;
+        System.out.println("======== Selamat Datang di Cetak Filkom ========");
         do {
+            if (isEmpty) {
+                System.out.println("Isi biodata dibawah ini");
+                System.out.println("Masukkan nama depan anda : ");
+                r1.setNamaDepan(in.nextLine());
+                System.out.println("Masukkan nama belakang anda : ");
+                r1.setNamaBelakang(in.nextLine());
+                isEmpty = false;
+            }
             UIFunc.tampilanUtama();
             input = in.nextInt();
             in.nextLine();
             UIFunc.line();
             if (input == 1){
-                p1 = UIFunc.registrasiPelanggan(in, p1);
+                r1 = UIFunc.registrasiPelanggan(in, r1);
             } else if (input == 2) {
                 do {
                     lembar = 0;
@@ -26,8 +35,61 @@ public class Main {
                     int get = in.nextInt();
                     UIFunc.line();
                     if (get == 1){
-                        //will do it later
-                        System.out.println("SARI ROTI");
+                        System.out.print("Masukkan judul buku yang ingin anda cetak: ");
+                        String judulBuku = in.nextLine();
+                        in.nextLine();
+                        System.out.print("Masukkan penulis buku yang ingin anda cetak: ");
+                        String penulis = in.nextLine();
+                        while (true) {
+                            try {
+                                System.out.print("Masukkan berapa lembar yang anda ingin cetak: ");
+                                lembar = in.nextInt();
+                                break;
+                            } catch (InputMismatchException e) {
+                                System.out.println("Input harus berupa angka");
+                                in.nextLine();
+                            }
+                        }
+                        in.nextLine();
+                        System.out.print("Masukkan jenis pembayaran yang anda suka      : ");
+                        String jenisBayar = in.nextLine();
+                        System.out.println("Masukkan jenis kertas yang dibutuhkan         :\n1.A4\n2.A5\n3.F4 ");
+                        System.out.print("Pilihan Anda: ");
+                        int jenisKertas = in.nextInt();
+                        String kertas = "";
+                        switch (jenisKertas){
+                            case 1 -> kertas = "A4";
+                            case 2 -> kertas = "A5";
+                            case 3 -> kertas = "F4";
+                        }
+
+                        System.out.println("Masukkan jenis jilid yang dibutuhkan         :\n1.Spiral\n2.Perfect Binding\n3.Lakban ");
+                        System.out.print("Pilihan Anda: ");
+                        int jenisJilid = in.nextInt();
+                        String jilid = "";
+                        switch (jenisJilid){
+                            case 1 -> jilid = "Spiral";
+                            case 2 -> jilid = "Perfect Binding";
+                            case 3 -> jilid = "Lakban";
+                        }
+
+                        UIFunc.line();
+                        Kertas k1 = new Kertas(kertas);
+                        Jilid j1 = new Jilid(jilid);
+                        Cetak c1 = new Cetak(lembar,jenisBayar);
+                        CetakBuku cb1 = new CetakBuku(c1.getJumlahHalaman(), c1.getJenisPembayaran(),judulBuku,penulis,j1.getJenisJilid(), k1.getJenisKertas(),r1);
+                        System.out.println("Jumlah Harga yang dibayar: "+cb1.hargaCetak());
+                        System.out.print("Masukkan jumlah uang Anda: ");
+                        c1.setJumlahPembayaran(in.nextInt());
+                        System.out.println(c1.getJumlahPembayaran());
+                        if(r1.isMember()){
+                            m1.addMember(r1.getAlamat(),r1.getNoTelp(),r1.getEmail(),r1.isMember());
+                            m1.earnPoint();
+                        }
+                        System.out.println("Point Anda: "+m1.getPoint());
+                        cb1.printStruk(r1,cb1.hargaCetak(),kertas,k1.getHarga(),j1.getHarga(), j1.getJenisJilid(),c1.getJumlahPembayaran());
+
+
                     } else if (get == 2) {
                         while (true) {
                             try {
@@ -55,16 +117,16 @@ public class Main {
                         UIFunc.line();
                         Kertas k1 = new Kertas(kertas);
                         Cetak c1 = new Cetak(lembar,jenisBayar);
-                        CetakLembaran l1 = new CetakLembaran(c1.getJumlahHalaman(),c1.getJenisPembayaran(),kertas,p1);
+                        CetakLembaran l1 = new CetakLembaran(c1.getJumlahHalaman(),c1.getJenisPembayaran(),kertas,r1);
                         System.out.println("Jumlah Harga yang dibayar: "+l1.hargaCetak());
                         System.out.print("Masukkan jumlah uang Anda: ");
                         c1.setJumlahPembayaran(in.nextInt());
-                        if(p1.isMember()){
-                            m1.addMember(p1.getNama(),p1.getAlamat(),p1.getNoTelp(),p1.getEmail(),p1.isMember());
+                        if(r1.isMember()){
+                            m1.addMember(r1.getAlamat(),r1.getNoTelp(),r1.getEmail(),r1.isMember());
                             m1.earnPoint();
                         }
                         System.out.println("Point Anda: "+m1.getPoint());
-                        c1.printStruk(p1,l1.hargaCetak(),kertas,k1.getHarga());
+                        l1.printStruk(r1,l1.hargaCetak(),kertas,k1.getHarga(),0,"",c1.getJumlahPembayaran());
                     } else if (get == 3) {
                         break;
                     } else if (get == 4) {

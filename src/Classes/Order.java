@@ -12,6 +12,7 @@ public class Order {
     private int diskon;
     private int totalHarga;
     private Status status;
+    private boolean checkOut;
 
     public Order(int biayaCetak,int diskon ,String kecamatan){
         this.biayaCetak = biayaCetak;
@@ -89,15 +90,14 @@ public class Order {
         Dibatalkan;
     }
     public String getStatusString() {
-        switch (status) {
-            case Lunas:
-                return "Lunas";
-            case BelumBayar:
-                return "Belum dibayar";
-            case Dibatalkan:
-                return "Dibatalkan";
-            default:
-                return "";
-        }
+        return switch (status) {
+            case Lunas -> "Lunas";
+            case BelumBayar -> "Belum dibayar";
+            case Dibatalkan -> "Dibatalkan";
+            default -> "";
+        };
+    }
+    public void checkOut() {
+
     }
 }

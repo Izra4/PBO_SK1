@@ -1,28 +1,36 @@
 package Classes;
 
-public class Pelanggan {
-    private String nama;
+public abstract class Pelanggan {
+    private String namaDepan;
+    private String namaBelakang;
     private String alamat;
     private String noTelp;
     private String email;
     private boolean member;
-//    private static int noAntrian;
 
-    public Pelanggan(String nama, String alamat, String noTelp, String email, boolean member){
-        this.nama = nama;
+    public Pelanggan(String namaDepan, String namaBelakang,String alamat, String noTelp, String email, boolean member){
+        this.namaDepan = namaDepan;
+        this.namaBelakang = namaBelakang;
         this.alamat = alamat;
         this.noTelp = noTelp;
         this.email = email;
         this.member = member;
-//        noAntrian++;
     }
 
-    public String getNama() {
-        return nama;
+    public String getNamaDepan() {
+        return namaDepan;
     }
 
-    public void setNama(String nama) {
-        this.nama = nama;
+    public void setNamaDepan(String namaDepan) {
+        this.namaDepan = namaDepan;
+    }
+
+    public String getNamaBelakang() {
+        return namaBelakang;
+    }
+
+    public void setNamaBelakang(String namaBelakang) {
+        this.namaBelakang = namaBelakang;
     }
 
     public String getAlamat() {
@@ -58,13 +66,15 @@ public class Pelanggan {
         return member;
     }
 
+    public String fullNama(String namaDepan,String namaBelakang) {
+        return namaDepan + " " + namaBelakang;
+    }
+    public String getFullNama() {
+        return fullNama(getNamaDepan(),getNamaBelakang());
+    }
 
-//    public static int getNoAntrian() {
-//        return noAntrian;
-//    }
-
-    public void registrasi(String nama, String alamat, String noTelp, String email, Boolean member){
-        setNama(nama);
+    public void registrasi(String namaDepan,String namaBelakang ,String alamat, String noTelp, String email, Boolean member){
+        fullNama(namaDepan,namaBelakang);
         setAlamat(alamat);
         setNoTelp(noTelp);
         setEmail(email);
@@ -79,4 +89,3 @@ public class Pelanggan {
         }
     }
 }
-

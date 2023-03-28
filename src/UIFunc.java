@@ -1,5 +1,9 @@
+//import Classes.Cetak;
 import Classes.Pelanggan;
+import Classes.Reguler;
+//import Classes.cetakLembaran;
 
+//import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class UIFunc {
@@ -8,6 +12,14 @@ public class UIFunc {
      */
     public static void line() {
         System.out.println("=====================================================");
+    }
+    public static Reguler biodata(Scanner in,Pelanggan r1) {
+        System.out.println("Silahkan isi biodata dibawah ini");
+        System.out.print("Masukkan nama depan anda : ");
+        String namaDepan = in.nextLine();
+        System.out.print("Masukkan nama belakang anda : ");
+        String namaBelakang = in.nextLine();
+        return new Reguler(namaDepan,namaBelakang,"","","",false);
     }
 
     /**
@@ -35,15 +47,15 @@ public class UIFunc {
         System.out.print("Pilihan Anda: ");
     }
 
-    public static Pelanggan registrasiPelanggan(Scanner in, Pelanggan p1) {
-        System.out.print("Masukkan nama Anda\t\t: ");
-        String nama = in.nextLine();
-        System.out.print("Masukkan alamat Anda\t\t: ");
+    public static Reguler registrasiPelanggan(Scanner in, Reguler r1) {
+        System.out.print("Masukkan alamat Anda\t\t : ");
         String alamat = in.nextLine();
-        System.out.print("Masukkan nomer telpon Anda\t:");
+        System.out.print("Masukkan nomer telpon Anda\t : ");
         String number = in.nextLine();
-        System.out.print("Masukkan alamat email Anda\t:");
+        System.out.print("Masukkan alamat email Anda\t : ");
         String email = in.nextLine();
-        return new Pelanggan(nama, alamat, number, email, true);
+        String namaDepan = r1.getNamaDepan();
+        String namaBelakang = r1.getNamaBelakang();
+        return new Reguler(namaDepan,namaBelakang,alamat, number, email, true);
     }
 }
