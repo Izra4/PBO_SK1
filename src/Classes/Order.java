@@ -13,6 +13,7 @@ public class Order {
     private int totalHarga;
     private Status status;
     private boolean checkOut;
+    private int jumlahBayar;
 
     public Order(int biayaCetak,double diskon ,String kecamatan){
         this.biayaCetak = biayaCetak;
@@ -30,6 +31,10 @@ public class Order {
 
     public double getDiskon() {
         return diskon;
+    }
+
+    public void setBiayaCetak(int biayaCetak) {
+        this.biayaCetak = biayaCetak;
     }
 
     public int getBiayaCetak() {
@@ -52,6 +57,14 @@ public class Order {
 
     public String getKecamatan() {
         return kecamatan;
+    }
+
+    public int getJumlahBayar() {
+        return jumlahBayar;
+    }
+
+    public void setJumlahBayar(int jumlahBayar) {
+        this.jumlahBayar = jumlahBayar;
     }
 
     public int getOngkir() {

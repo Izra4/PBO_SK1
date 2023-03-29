@@ -139,6 +139,10 @@ public abstract class Pelanggan {
     }
     public void makeOrder(Scanner in, Pelanggan r1, member m1) {
         char req;
+        String jenisBayar = "";
+        int halaman = 0;
+        int hargaKertas=0;
+
         System.out.print("Mau order berapa kali : ");
         int inputOrder = in.nextInt();
         int[] pages = new int[inputOrder];
@@ -147,6 +151,22 @@ public abstract class Pelanggan {
         String[] writer = new String[inputOrder];
         String[] jenisPaper = new String[inputOrder];
         String[] tipeJilid = new String[inputOrder];
+        in.nextLine();
+
+        System.out.print("Masukkan jenis pembayaran yang anda suka      : ");
+        jenisBayar = in.nextLine();
+        System.out.println("Masukkan lokasi pengiriman:\n1. Sukun\n2. Wagir\n3. Lowokwaru\n4. Klojen");
+        int kec = in.nextInt();
+        String kecamatan = "";
+        switch (kec){
+            case 1 -> kecamatan = "Sukun";
+            case 2 -> kecamatan = "Wagir";
+            case 3 -> kecamatan = "Lowokwaru";
+            case 4 -> kecamatan = "Klojen";
+        }
+
+        Order order = new Order(0, getDiscount(),kecamatan);
+
         for(int i=0; i<inputOrder; i++) {
             int lembar = 0;
             //Tampil menu
@@ -154,17 +174,7 @@ public abstract class Pelanggan {
             int get = in.nextInt();
             in.nextLine();
             UIFunc.line();
-            System.out.print("Masukkan jenis pembayaran yang anda suka      : ");
-            String jenisBayar = in.nextLine();
-            System.out.println("Masukkan lokasi pengiriman:\n1. Sukun\n2. Wagir\n3. Lowokwaru\n4. Klojen");
-            int kec = in.nextInt();
-            String kecamatan = "";
-            switch (kec){
-                case 1 -> kecamatan = "Sukun";
-                case 2 -> kecamatan = "Wagir";
-                case 3 -> kecamatan = "Lowokwaru";
-                case 4 -> kecamatan = "Klojen";
-            }
+
             UIFunc.line();
             if (get == 1){
                 System.out.print("Masukkan judul buku yang ingin anda cetak: ");
@@ -211,7 +221,7 @@ public abstract class Pelanggan {
                 Jilid j1 = new Jilid(jilid);
                 Cetak c1 = new Cetak(lembar,jenisBayar);
                 CetakBuku cb1 = new CetakBuku(c1.getJumlahHalaman(), c1.getJenisPembayaran(),judul,penulis,j1.getJenisJilid(), k1.getJenisKertas(),r1);
-                Order order = new Order(cb1.hargaCetak(), getDiscount(),kecamatan);
+//                Order order = new Order(cb1.hargaCetak(), getDiscount(),kecamatan);
                 System.out.println("Jumlah Harga yang dibayar: "+(cb1.hargaCetak()+order.getOngkir()));
                 totalBiaya[i] = cb1.hargaCetak();
                 System.out.print("Masukkan jumlah uang Anda: ");
@@ -232,6 +242,7 @@ public abstract class Pelanggan {
                         System.out.print("Masukkan berapa lembar yang anda ingin cetak: ");
                         lembar = in.nextInt();
                         pages[i] = lembar;
+                        halaman = lembar;
                         break;
                     } catch (InputMismatchException e) {
                         System.out.println("Input harus berupa angka");
@@ -251,14 +262,13 @@ public abstract class Pelanggan {
                 jenisPaper[i] = kertas;
                 UIFunc.line();
                 Kertas k1 = new Kertas(kertas);
+                hargaKertas = k1.getHarga();
+
                 Cetak c1 = new Cetak(lembar,jenisBayar);
                 CetakLembaran l1 = new CetakLembaran(c1.getJumlahHalaman(),c1.getJenisPembayaran(),kertas,r1);
-                Order order = new Order(l1.hargaCetak(), getDiscount(),kecamatan);
-                System.out.println("Jumlah Harga yang dibayar: "+(l1.hargaCetak()+order.getOngkir()));
+//                Order order = new Order(l1.hargaCetak(), getDiscount(),kecamatan);
                 totalBiaya[i] = l1.hargaCetak();
-                System.out.print("Masukkan jumlah uang Anda: ");
-                c1.setJumlahPembayaran(in.nextInt());
-                System.out.println(c1.getJumlahPembayaran());
+                order.setBiayaCetak(l1.hargaCetak());
                 if(r1.isMember()){
                     m1.addMember(r1.getAlamat(),r1.getNoTelp(),r1.getEmail(),r1.isMember());
                     m1.earnPoint();
@@ -266,9 +276,6 @@ public abstract class Pelanggan {
                 System.out.println("Point Anda: "+m1.getPoint());
 //                l1.printStruk(r1,l1.hargaCetak(),kertas,k1.getHarga(),0,"",c1.getJumlahPembayaran());
 //                if(i==inputOrder-1){
-                    System.out.println("Checkout? (y/n): ");
-                    req = in.next().charAt(0);
-                    order.printDetails(req,r1,jenisBayar,c1.getJumlahHalaman(),k1.getJenisKertas(),k1.getHarga(), c1.getJumlahPembayaran());
 //                }
                   } else if (get == 3) {
                 break;
@@ -286,55 +293,64 @@ public abstract class Pelanggan {
         setWriter(writer);
         setJenisPaper(jenisPaper);
         setTipeJilid(tipeJilid);
+
+        System.out.println("Checkout? (y/n): ");
+        req = in.next().charAt(0);
+        System.out.println("Jumlah yang harus dibayarkan: "+totalPrice());
+        System.out.print("Uang Anda                   : ");
+        order.setJumlahBayar(in.nextInt());
+        order.printDetails(req,r1,jenisBayar,pages(),printJenisPaper(),hargaKertas, order.getJumlahBayar());
     }
 
     public void printJudul(){
-        for (int i=0; i< judul.length;i++) {
-            if (judul[i] == null){
+        for (String s : judul) {
+            if (s == null) {
                 break;
             }
-            System.out.println(judul[i]);
+            System.out.println(s);
         }
     }
     public void printWriter() {
-        for (int i=0; i< writer.length;i++) {
-            if (writer[i] == null){
+        for (String s : writer) {
+            if (s == null) {
                 break;
             }
-            System.out.println(writer[i]);
+            System.out.println(s);
         }
     }
 
-    public void printJenisPaper() {
-        for (int i=0; i< jenisPaper.length;i++) {
-            if (jenisPaper[i] == null){
+    public String printJenisPaper() {
+        String paper = "";
+        for (String s : jenisPaper) {
+            if (s == null) {
                 break;
             }
-            System.out.println(jenisPaper[i]);
+            paper += s+", ";
         }
+        return paper;
     }
 
     public void printJilid() {
-        for (int i=0; i< tipeJilid.length;i++) {
-            if (tipeJilid[i] == null){
+        for (String s : tipeJilid) {
+            if (s == null) {
                 break;
             }
-            System.out.println(tipeJilid[i]);
+            System.out.println(s);
         }
     }
 
     public int pages() {
         int total=0;
-        for (int i=0;i<pages.length;i++){
-            total += pages[i];
+        for (int page : pages) {
+            total += page;
         }
         return total;
     }
 
     public int totalPrice(){
         int total=0;
-        for (int i=0;i<totalBiaya.length;i++){
-            total += totalBiaya[i];
+        for (int j : totalBiaya) {
+            total += j;
         }
         return total;
     }
