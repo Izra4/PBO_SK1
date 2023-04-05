@@ -3,7 +3,7 @@ package Classes;
 import java.time.LocalDate;
 import java.util.Random;
 
-public abstract class Promotion implements Applicable {
+public abstract class Promotion implements Applicable,Comparable {
     private int promoCode;
     private LocalDate mulai;
     private LocalDate berakhir;
@@ -53,67 +53,19 @@ public abstract class Promotion implements Applicable {
     public boolean isShippingFeeEligible(Order order) {
         return order.getTotalHarga() >= 50000;
     }
-}
-class PotongHarga extends Promotion {
-    public PotongHarga() {
-        super();
+
+    @Override
+    public double totalCashBack(Order order) {
+        return
     }
 
-    public double promoDiskon(Order order,Pelanggan pelanggan) throws Exception {
-        if (!isCustomerEligible(pelanggan)) {
-            return -1;
-        }else if (isShippingFeeEligible(order)) {
-            return -1;
-        } else if (isMinimumPriceEligible(order)) {
-            throw new Exception("Minimal Transaksi harus 50000");
-        } else {
-            return (int) order.getTotalHarga() * 0.01;
-        }
+    @Override
+    public double totalDiskon(Order order) {
+        return 0;
+    }
 
+    @Override
+    public double totalOngkir(Order order) {
+        return 0;
     }
 }
-
-
-    class CashBack extends Promotion {
-        public CashBack() {
-            super();
-        }
-
-        public double promoCashBack(Order order,Pelanggan pelanggan) throws Exception {
-            int cashBack = 0;
-            if (!isCustomerEligible(pelanggan)) {
-                return -1;
-            }else if (isShippingFeeEligible(order)) {
-                return -1;
-            }else if (isMinimumPriceEligible(order)) {
-                throw new Exception("Minimal Transaksi harus 50000");
-            } else if (order.getTotalHarga() >= 50000 && order.getTotalHarga() < 75000) {
-                cashBack = 3000;
-            } else if (order.getTotalHarga() >= 75000 && order.getTotalHarga() < 10000) {
-                cashBack = 5000;
-            } else if (order.getTotalHarga() >= 100000) {
-                cashBack = 7000;
-            }
-            return cashBack;
-        }
-
-    }
-
-    class PotongOngkir extends Promotion {
-        public PotongOngkir() {
-            super();
-        }
-
-        public double promoOngkir(Order order,Pelanggan pelanggan) throws Exception {
-            int totalHarga = order.getTotalHarga();
-            int ongkir = order.getOngkir();
-            if (!isCustomerEligible(pelanggan)) {
-                return -1;
-            }else if (isShippingFeeEligible(order)) {
-                return -1;
-            }else if (isMinimumPriceEligible(order)) {
-                throw new Exception("Minimal Transaksi harus 50000");
-            }
-            return (int) ongkir * 0.01;
-        }
-    }
