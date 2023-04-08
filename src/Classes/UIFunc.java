@@ -1,4 +1,5 @@
-package Classes;//import Classes.Cetak;
+package Classes;
+
 import Classes.Pelanggan;
 import Classes.Reguler;
 //import Classes.cetakLembaran;

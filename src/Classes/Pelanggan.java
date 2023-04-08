@@ -9,7 +9,7 @@ public abstract class Pelanggan {
     private String alamat;
     private String noTelp;
     private String email;
-    private boolean member;
+    private boolean Member;
     private String[] judul;
     private int[] pages;
     private int[] totalBiaya;
@@ -23,7 +23,7 @@ public abstract class Pelanggan {
         this.alamat = alamat;
         this.noTelp = noTelp;
         this.email = email;
-        this.member = member;
+        this.Member = member;
     }
 
     public int[] getPages() {
@@ -111,7 +111,7 @@ public abstract class Pelanggan {
     }
 
     public void setMember(boolean member) {
-        this.member = member;
+        this.Member = member;
     }
 
 
@@ -120,7 +120,7 @@ public abstract class Pelanggan {
     }
 
     public boolean isMember() {
-        return member;
+        return Member;
     }
 
     public String fullNama(String namaDepan,String namaBelakang) {
@@ -137,7 +137,7 @@ public abstract class Pelanggan {
             return 0.0;
         }
     }
-    public void makeOrder(Scanner in, Pelanggan r1, member m1) {
+    public void makeOrder(Scanner in, Pelanggan r1, Member m1) {
         char req;
         String jenisBayar = "";
         int halaman = 0;
@@ -277,7 +277,7 @@ public abstract class Pelanggan {
 //                l1.printStruk(r1,l1.hargaCetak(),kertas,k1.getHarga(),0,"",c1.getJumlahPembayaran());
 //                if(i==inputOrder-1){
 //                }
-                  } else if (get == 3) {
+            } else if (get == 3) {
                 break;
             } else if (get == 4) {
                 System.out.println("Selamat Tinggal");

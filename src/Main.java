@@ -7,7 +7,9 @@ public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         Reguler r1 = new Reguler("","","","","",false);
-        member m1 = new member(r1.getNamaDepan(), r1.getNamaBelakang(), r1.getAlamat(),r1.getNoTelp(),r1.getEmail(),r1.isMember());
+        Member m1 = new Member(r1.getNamaDepan(), r1.getNamaBelakang(), r1.getAlamat(),r1.getNoTelp(),r1.getEmail(),r1.isMember());
+        PotongHarga ph1 = new PotongHarga();
+        System.out.println(ph1.getPromoCode());
         int input,lembar;
         char req;
         boolean isEmpty = true;
