@@ -299,6 +299,7 @@ public abstract class Pelanggan {
         System.out.println("Jumlah yang harus dibayarkan: "+totalPrice());
         System.out.print("Uang Anda                   : ");
         order.setJumlahBayar(in.nextInt());
+
         order.printDetails(req,r1,jenisBayar,pages(),printJenisPaper(),hargaKertas, order.getJumlahBayar());
     }
 

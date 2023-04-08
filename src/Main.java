@@ -21,6 +21,8 @@ public class Main {
                 r1.setNamaBelakang(in.nextLine());
                 isEmpty = false;
                 UIFunc.line();
+                System.out.print("\033\143");
+                System.out.flush();
             }
             UIFunc.tampilanUtama();
             input = in.nextInt();
