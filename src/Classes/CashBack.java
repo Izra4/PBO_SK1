@@ -1,43 +1,54 @@
 package Classes;
 
 public class CashBack extends Promotion {
+    private double cashBack;
+    private final String nama = "CashBackAsyik";
     public CashBack() {
         super();
     }
 
-    public double promoCashBack(Order order, Pelanggan pelanggan) throws Exception {
-        int cashBack = 0;
-
-        if (isShippingFeeEligible(order)) {
-            return -1;
-        } else if (isMinimumPriceEligible(order)) {
-            throw new Exception("Minimal Transaksi harus 50000");
-        } else if (order.getTotalHarga() >= 50000 && order.getTotalHarga() < 75000) {
-            cashBack = 3000;
-        } else if (order.getTotalHarga() >= 75000 && order.getTotalHarga() < 10000) {
-            cashBack = 5000;
-        } else if (order.getTotalHarga() >= 100000) {
-            cashBack = 7000;
-        }
-        return cashBack;
+    public double getCashBack() {
+        return this.cashBack;
     }
 
-    public double promoCashBackMember(Order order, Pelanggan pelanggan) throws Exception {
-        int cashBack = 0;
-        if (!isCustomerEligible(pelanggan)) {
-            return -1;
-        } else if (isShippingFeeEligible(order)) {
-            return -1;
-        } else if (isMinimumPriceEligible(order)) {
+    public String getNama() {
+        return nama;
+    }
+
+    public void promoCashBack(Order order, Pelanggan pelanggan) throws Exception {
+        double harga = order.getTotalHarga();
+        this.cashBack = 0;
+
+        if (!isShippingFeeEligible(order)) {
+            throw new Exception("Ongkir tidak memenuhi");
+        } else if (!isMinimumPriceEligible(order)) {
             throw new Exception("Minimal Transaksi harus 50000");
-        } else if (order.getTotalHarga() >= 50000 && order.getTotalHarga() < 75000) {
-            cashBack = 5000;
-        } else if (order.getTotalHarga() >= 75000 && order.getTotalHarga() < 10000) {
-            cashBack = 8000;
-        } else if (order.getTotalHarga() >= 100000) {
-            cashBack = 10000;
+        } else if (harga >= 50000 && harga < 75000) {
+            this.cashBack += 3000;
+        } else if (harga >= 75000 && harga < 10000) {
+            this.cashBack += 5000;
+        } else if (harga >= 100000) {
+            this.cashBack += 7000;
         }
-        return cashBack;
+    }
+
+    public void promoCashBackMember(Order order, Pelanggan pelanggan) throws Exception {
+        double harga = order.getTotalHarga();
+        this.cashBack = 0;
+
+        if (!isCustomerEligible(pelanggan)) {
+            throw new Exception("Anda bukan member!");
+        } else if (!isShippingFeeEligible(order)) {
+            throw new Exception("Ongkir tidak memenuhi");
+        } else if (!isMinimumPriceEligible(order)) {
+            throw new Exception("Minimal Transaksi harus 50000");
+        } else if (harga >= 50000 && harga < 75000) {
+            this.cashBack += 5000;
+        } else if (harga >= 75000 && harga < 10000) {
+            this.cashBack += 8000;
+        } else if (harga >= 100000) {
+            this.cashBack += 10000;
+        }
     }
 
 }

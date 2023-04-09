@@ -17,6 +17,7 @@ public abstract class Pelanggan {
     private String[] jenisPaper;
     private String[] tipeJilid;
 
+
     public Pelanggan(String namaDepan, String namaBelakang,String alamat, String noTelp, String email, boolean member){
         this.namaDepan = namaDepan;
         this.namaBelakang = namaBelakang;
@@ -137,7 +138,7 @@ public abstract class Pelanggan {
             return 0.0;
         }
     }
-    public void makeOrder(Scanner in, Pelanggan r1, Member m1) {
+    public void makeOrder(Scanner in, Pelanggan r1, Member m1,PotongHarga potongHarga,PotongOngkir potongOngkir,CashBack cashBack) {
         char req;
         String jenisBayar = "";
         int halaman = 0;
@@ -260,6 +261,12 @@ public abstract class Pelanggan {
                     case 3 -> kertas = "F4";
                 }
                 jenisPaper[i] = kertas;
+                UIFunc.line();
+
+                System.out.println("Pilih Promo yang tersedia di bawah ini : ");
+
+                in.nextLine();
+                System.out.print("Pilihan Anda: ");
                 UIFunc.line();
                 Kertas k1 = new Kertas(kertas);
                 hargaKertas = k1.getHarga();

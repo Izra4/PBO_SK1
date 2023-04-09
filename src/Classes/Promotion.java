@@ -7,12 +7,15 @@ public abstract class Promotion implements Applicable,Comparable {
     private int promoCode;
     private LocalDate mulai;
     private LocalDate berakhir;
+    private int jumlahPromo = 0;
+
 
     public Promotion() {
         Random random = new Random();
         this.promoCode = random.nextInt(100);
         this.mulai = LocalDate.now();
         this.berakhir = LocalDate.now().plusDays(3);
+        this.jumlahPromo++;
     }
 
     public int getPromoCode() {
@@ -51,21 +54,45 @@ public abstract class Promotion implements Applicable,Comparable {
 
     @Override
     public boolean isShippingFeeEligible(Order order) {
-        return order.getTotalHarga() >= 50000;
+        return order.getOngkir() >= 5000;
     }
 
     @Override
-    public double totalCashBack(Order order) {
-        return
+    public double totalCashBack(Order order,CashBack cashBack) {
+        return cashBack.getCashBack();
     }
 
     @Override
-    public double totalDiskon(Order order) {
-        return 0;
+    public double totalDiskon(Order order,PotongHarga potongHarga) {
+        return potongHarga.getDiskon();
     }
 
     @Override
-    public double totalOngkir(Order order) {
-        return 0;
+    public double totalOngkir(Order order,PotongOngkir potongOngkir) {
+        return potongOngkir.getTotalOngkir();
+    }
+
+
+
+    @Override
+    public void compareTo(Order order,PotongOngkir potongOngkir,PotongHarga potongHarga,CashBack cashBack) {
+        String[] listPromo = new String[this.jumlahPromo];
+        int count = 0;
+
+        if (totalDiskon(order,potongHarga) > totalOngkir(order,potongOngkir) || totalDiskon(order, potongHarga) > totalCashBack(order, cashBack)) {
+            listPromo[count] = potongHarga.getNama();
+            count++;
+        } else if (totalOngkir(order, potongOngkir) > totalDiskon(order, potongHarga) || totalOngkir(order, potongOngkir) > totalCashBack(order, cashBack)) {
+            listPromo[count] = potongOngkir.getNama();
+            count++;
+        } else if (totalCashBack(order, cashBack) > totalDiskon(order, potongHarga) || totalCashBack(order, cashBack) > totalOngkir(order, potongOngkir)) {
+            listPromo[count] = cashBack.getNama();
+            count++;
+        }
+        System.out.print("Daftar Promo: ");
+        for (int i = 0; i < count; i++) {
+            System.out.print(listPromo[i] + " ");
+        }
+        System.out.println();
     }
 }
