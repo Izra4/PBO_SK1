@@ -16,10 +16,6 @@ public class CetakLembaran extends Cetak {
         return jenisKertas;
     }
 
-    public void setJenisKertas(String jenisKertas) {
-        this.jenisKertas = jenisKertas;
-    }
-
     public int hargaCetak() {
         Kertas kertas = new Kertas(getJenisKertas());
         double diskon = pelanggan.getDiscount(); // call getDiscount() method using pelanggan object

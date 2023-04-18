@@ -51,14 +51,6 @@ public class Order {
         setTotalHarga();
     }
 
-    public void setKecamatan(String kecamatan) {
-        this.kecamatan = kecamatan;
-    }
-
-    public String getKecamatan() {
-        return kecamatan;
-    }
-
     public int getJumlahBayar() {
         return jumlahBayar;
     }
@@ -70,8 +62,8 @@ public class Order {
     public int getOngkir() {
         return ongkir;
     }
-    private void setTotalHarga(){
-        this.totalHarga = (int) (biayaCetak + ongkir - diskon);
+    public void setTotalHarga(){
+        this.totalHarga = (int) (getBiayaCetak() + getOngkir() - diskon);
     }
     public int getTotalHarga() {
         return totalHarga;
@@ -110,6 +102,8 @@ public class Order {
             return false;
         }
     }
+
+    //STRUK LEMBAR
     public void printDetails(char pilih, Pelanggan pelanggan, String jenisBayar, int halaman, String kertas,int hargaKertas,int uang) {
         if (checkOut(pilih)){
             System.out.println("===============================");
@@ -136,6 +130,8 @@ public class Order {
             System.out.println("Anda belum checkout!");
         }
     }
+
+    //STRUK BUKU
     public void printDetails(char pilih, Pelanggan pelanggan, String jenisBayar, int halaman,String jenisJilid,int hargaJilid ,String kertas,int hargaKertas,int uang) {
         if (checkOut(pilih)){
             System.out.println("===============================");

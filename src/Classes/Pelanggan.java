@@ -167,14 +167,12 @@ public abstract class Pelanggan {
         }
 
         Order order = new Order(0, getDiscount(),kecamatan);
-
         for(int i=0; i<inputOrder; i++) {
             int lembar = 0;
             //Tampil menu
             UIFunc.tampilanCetak();
             int get = in.nextInt();
             in.nextLine();
-            UIFunc.line();
 
             UIFunc.line();
             if (get == 1){
@@ -230,14 +228,13 @@ public abstract class Pelanggan {
                 System.out.println(c1.getJumlahPembayaran());
                 if(r1.isMember()){
                     m1.addMember(r1.getAlamat(),r1.getNoTelp(),r1.getEmail(),r1.isMember());
-                    m1.earnPoint();
                 }
-                System.out.println("Point Anda: "+ m1.getPoint());
 //                cb1.printStruk(r1,cb1.hargaCetak(),kertas,k1.getHarga(),j1.getHarga(), j1.getJenisJilid(),c1.getJumlahPembayaran());
                 System.out.println("Checkout? (y/n): ");
                 req = in.next().charAt(0);
                 order.printDetails(req,r1, cb1.getJenisPembayaran(), cb1.getJumlahHalaman(), j1.getJenisJilid(), j1.getHarga(),kertas,k1.getHarga(), c1.getJumlahPembayaran());
-            } else if (get == 2) {
+            }
+            else if (get == 2) {
                 while (true) {
                     try {
                         System.out.print("Masukkan berapa lembar yang anda ingin cetak: ");
@@ -267,6 +264,7 @@ public abstract class Pelanggan {
 
                 in.nextLine();
                 System.out.print("Pilihan Anda: ");
+                System.out.println();
                 UIFunc.line();
                 Kertas k1 = new Kertas(kertas);
                 hargaKertas = k1.getHarga();
@@ -278,12 +276,7 @@ public abstract class Pelanggan {
                 order.setBiayaCetak(l1.hargaCetak());
                 if(r1.isMember()){
                     m1.addMember(r1.getAlamat(),r1.getNoTelp(),r1.getEmail(),r1.isMember());
-                    m1.earnPoint();
                 }
-                System.out.println("Point Anda: "+m1.getPoint());
-//                l1.printStruk(r1,l1.hargaCetak(),kertas,k1.getHarga(),0,"",c1.getJumlahPembayaran());
-//                if(i==inputOrder-1){
-//                }
             } else if (get == 3) {
                 break;
             } else if (get == 4) {
@@ -303,10 +296,10 @@ public abstract class Pelanggan {
 
         System.out.println("Checkout? (y/n): ");
         req = in.next().charAt(0);
-        System.out.println("Jumlah yang harus dibayarkan: "+totalPrice());
+        System.out.println("Jumlah yang harus dibayarkan: "+(totalPrice()+order.getOngkir()));
         System.out.print("Uang Anda                   : ");
         order.setJumlahBayar(in.nextInt());
-
+        order.setTotalHarga();
         order.printDetails(req,r1,jenisBayar,pages(),printJenisPaper(),hargaKertas, order.getJumlahBayar());
     }
 
